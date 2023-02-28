@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { WeatherIcons } from "../App";
+import "../style.css";
 
 export const WeatherInfoIcons = {
   sunset: "/react-weather-app/icons/temp.svg",
@@ -9,95 +10,17 @@ export const WeatherInfoIcons = {
   wind: "/react-weather-app/icons/wind.svg",
   pressure: "/react-weather-app/icons/pressure.svg",
 };
-const Location = styled.span`
-  margin: 15px auto;
-  text-transform: capitalize;
-  font-size: 28px;
-  font-weight: bold;
-`;
-const Condition = styled.span`
-  margin: 20px auto;
-  text-transform: capitalize;
-  font-size: 14px;
-  & span {
-    font-size: 28px;
-  }
-`;
-const WeatherInfoLabel = styled.span`
-  margin: 20px 25px 10px;
-  text-transform: capitalize;
-  text-align: start;
-  width: 90%;
-  font-weight: bold;
-  font-size: 14px;
-`;
-const WeatherIcon = styled.img`
-  width: 100px;
-  height: 100px;
-  margin: 5px auto;
-`;
-const WeatherContainer = styled.div`
-  display: flex;
-  width: 100%;
-  margin: 30px auto;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const WeatherInfoContainer = styled.div`
-  display: flex;
-  width: 90%;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-wrap: wrap;
-`;
-const InfoContainer = styled.div`
-  display: flex;
-  margin: 5px 10px;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-`;
-const InfoIcon = styled.img`
-  width: 36px;
-  height: 36px;
-`;
-const InfoLabel = styled.span`
-  display: flex;
-  flex-direction: column;
-  font-size: 14px;
-  margin: 15px;
-  & span {
-    font-size: 12px;
-    text-transform: capitalize;
-  }
-`;
-const Button = styled.button`
-  background-color: black;
-  font-size: 14px;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  padding: 10px;
-  color: white;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  font-family: Montserrat;
-  font-weight: bold;
-`;
 
 const WeatherInfoComponent = (props) => {
   const { name, value } = props;
   return (
-    <InfoContainer>
-      <InfoIcon src={WeatherInfoIcons[name]} />
-      <InfoLabel>
+    <div className="info-cont">
+      <img src={WeatherInfoIcons[name]} className="info-icon" />
+      <span className="info-label">
         {value}
         <span>{name}</span>
-      </InfoLabel>
-    </InfoContainer>
+      </span>
+    </div>
   );
 };
 const WeatherComponent = (props) => {
@@ -110,17 +33,20 @@ const WeatherComponent = (props) => {
   };
   return (
     <>
-      <WeatherContainer>
-        <Condition>
+      <div className="wea-info">
+        <span className="condition">
           <span>{`${Math.floor(weather?.main?.temp - 273)}°C`}</span>
           {`  |  ${weather?.weather[0].description}`}
-        </Condition>
-        <WeatherIcon src={WeatherIcons[weather?.weather[0].icon]} />
-      </WeatherContainer>
-      <Location>{`${weather?.name}, ${weather?.sys?.country}`}</Location>
+        </span>
+        <img
+          src={WeatherIcons[weather?.weather[0].icon]}
+          className="wea-icon"
+        />
+      </div>
+      <span className="location">{`${weather?.name}, ${weather?.sys?.country}`}</span>
 
-      <WeatherInfoLabel>Weather Info</WeatherInfoLabel>
-      <WeatherInfoContainer>
+      <h1 className="wea-label">Weather Info</h1>
+      <div className="wea-info">
         <WeatherInfoComponent
           name={isDay ? "sunset" : "sunrise"}
           value={`${getTime(weather?.sys[isDay ? "sunset" : "sunrise"])}`}
@@ -134,8 +60,11 @@ const WeatherComponent = (props) => {
           name={"pressure"}
           value={weather?.main?.pressure}
         />
-      </WeatherInfoContainer>
-      <Button onClick={() => window.location.reload(false)}>New Search</Button>
+      </div>
+      <button onClick={() => window.location.reload(false)} className="wea-btn">
+        <img src="/react-weather-app/icons/left.png" className="back-icon" />{" "}
+        Back
+      </button>
     </>
   );
 };
