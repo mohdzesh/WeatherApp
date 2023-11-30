@@ -14,7 +14,7 @@ const CityComponent = (props) => {
 
   return (
     <>
-      <img className="weather-logo" src="/react-weather-app/icons/home.png" />
+      <img className="weather-logo" src="/react-weather-app/icons/home.png" alt="weather-logo" />
       <h1 className="citylabel">Find Weather of your city</h1>
       <div className="search-form" tabIndex="0">
         <form onSubmit={fetchWeather} className="search">
