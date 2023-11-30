@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import { WeatherIcons } from "../App";
 import "../style.css";
 
@@ -15,7 +14,7 @@ const WeatherInfoComponent = (props) => {
   const { name, value } = props;
   return (
     <div className="info-cont">
-      <img src={WeatherInfoIcons[name]} className="info-icon" />
+      <img src={WeatherInfoIcons[name]} className="info-icon"  alt="info-icon"/>
       <span className="info-label">
         {value}
         <span>{name}</span>
@@ -41,6 +40,7 @@ const WeatherComponent = (props) => {
         <img
           src={WeatherIcons[weather?.weather[0].icon]}
           className="wea-icon"
+            alt="wea-icon"
         />
       </div>
       <span className="location">{`${weather?.name}, ${weather?.sys?.country}`}</span>
@@ -62,7 +62,7 @@ const WeatherComponent = (props) => {
         />
       </div>
       <button onClick={() => window.location.reload(false)} className="wea-btn">
-        <img src="/react-weather-app/icons/left.png" className="back-icon" />{" "}
+        <img src="/react-weather-app/icons/left.png" className="back-icon" alt="back-icon" />{" "}
         Back
       </button>
     </>
